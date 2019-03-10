@@ -32,55 +32,27 @@ function tryConvert(temperature, convert) {
 }
 
 class Calculator extends React.Component {
-
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {
-      temperature : 0
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {temperature: ''};
   }
 
-  temperatureChange = (value,scale) => {
-      console.log(value);
-      this.setState({
-        temperature : value,
-        scale : scale
-      })
+  handleChange(e) {
+    this.setState({temperature: e.target.value});
   }
 
-  render() {    
-
+  render() {
     const temperature = this.state.temperature;
-    const scale = this.state.scale;
-    const celsius = scale === "c" ? temperature : tryConvert(temperature,toCelsius);
-    const fahrenheit = scale === "f" ? temperature : tryConvert(temperature,toFahrenheit);
-
-    return (
-      <React.Fragment>
-        <TemperatureInput scale="c" temperature={celsius} onTemperatureChange={this.temperatureChange}/>
-        <TemperatureInput scale="f" temperature={fahrenheit} onTemperatureChange={this.temperatureChange}/>
-        <BoilingVerdict
-          celsius={parseFloat(celsius)} />
-      </React.Fragment>
-    );
-  }
-}
-
-class TemperatureInput extends React.Component{
-
-  handleChange = (e) => {
-    this.props.onTemperatureChange(e.target.value,this.props.scale);
-  }
-
-  render(){
-    const temperature = this.props.temperature;
     return (
       <fieldset>
-        <legend>Enter temperature in {scaleNames[this.props.scale]}:</legend>
+        <legend>Enter temperature in Celsius:</legend>
         <input
           value={temperature}
-          onChange={this.handleChange} />      
+          onChange={this.handleChange} />
+
+        <BoilingVerdict
+          celsius={parseFloat(temperature)} />
 
       </fieldset>
     );
