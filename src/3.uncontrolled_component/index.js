@@ -5,10 +5,12 @@ class NameForm extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.input = React.createRef();
+    this.email = React.createRef();
   }
 
   handleSubmit(event) {
-    alert(`${this.input.current.value} submitted`);
+    alert(`${this.email.current.value} submitted`);
+    console.log(this.email.current.value);
     event.preventDefault();
   }
 
@@ -18,6 +20,10 @@ class NameForm extends Component {
         <label>
           Name:
           <input type="text" ref={this.input} />
+        </label>
+        <label>
+          Email:
+          <input type="email" ref={this.email} />
         </label>
         <input type="submit" value="Submit" />
       </form>

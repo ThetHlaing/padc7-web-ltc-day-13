@@ -62,4 +62,4 @@ function Chat(props) {
     return <div>Chat box here</div>
 }
 
-export {WelcomeDialog,ChatApp};
+export {WelcomeDialog,ChatApp,Dialog};
